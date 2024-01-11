@@ -6,6 +6,9 @@ const session = require('express-session');
 const app = express();
 const port = 3000;
 
+// Define the allowed email addresses
+const allowedEmails = ['kingakash1010@gmail.com', 'namanrao400@gmail.com', 'deepsinghjashan1313@gmail.com', 'gurusingh2585@gmail.com'];
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -22,19 +25,24 @@ app.get('/', (req, res) => {
 app.post('/sendOTP', async (req, res) => {
     const email = req.body.email;
 
-    // Generate random 6-digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    // Check if the provided email is in the allowed list
+    if (allowedEmails.includes(email)) {
+        // Generate random 6-digit OTP
+        const otp = Math.floor(100000 + Math.random() * 900000);
 
-    try {
-        const result = await sendMail(email, otp);
+        try {
+            const result = await sendMail(email, otp);
 
-        // Store the generated OTP in the session
-        req.session.generatedOTP = otp.toString();
+            // Store the generated OTP in the session
+            req.session.generatedOTP = otp.toString();
 
-        // Render a page where the user enters the OTP
-        res.render('verify', { email });
-    } catch (error) {
-        res.send(`Error: ${error.message}`);
+            // Render a page where the user enters the OTP
+            res.render('verify', { email });
+        } catch (error) {
+            res.send(`Error: ${error.message}`);
+        }
+    } else {
+        res.send('Invalid email address. Please try again with a valid email.');
     }
 });
 

@@ -27,19 +27,11 @@ async function sendMail(email, otp) {
 
         const mailOptions = {
             from: 'Naman Rao 👍<geoforce24x7@gmail.com>',
-            to: 'kingakash1010@gmail.com, namanrao400@gmail.com',
+            to: email,
             subject: 'OTP Verification',
             text: `Your OTP is: ${otp}`,
             html: `<h1>Your OTP is: ${otp}</h1>`,
         };
-
-        transport.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Error sending email:', error);
-            } else {
-                console.log('Email sent:', info.response);
-            }
-        });
 
         const result = await transport.sendMail(mailOptions);
         return result;
