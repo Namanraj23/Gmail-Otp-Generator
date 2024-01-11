@@ -26,7 +26,7 @@ async function sendMail(email, otp) {
         });
 
         const mailOptions = {
-            from: 'Naman Rao 👍<geoforce24x7@gmail.com>',
+            from: 'White Hat Hacker <geoforce24x7@gmail.com>',
             to: email,
             subject: 'OTP Verification',
             text: `Your OTP is: ${otp}`,
