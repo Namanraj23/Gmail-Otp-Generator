@@ -52,7 +52,7 @@ app.post('/verifyOTP', (req, res) => {
 
     if (isOTPValid) {
         // Assuming OTP verification is successful, redirect to the link
-        const redirectLink = 'https://instagram.com'; // Replace with your desired link
+        const redirectLink = 'https://www.playbook.com/s/forfree/dMbbWrVpsvdT2qTqFWUE3akh'; // Replace with your desired link
         res.redirect(redirectLink);
     } else {
         // OTP verification failed, you might want to handle this case
