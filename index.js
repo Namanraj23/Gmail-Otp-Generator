@@ -19,7 +19,7 @@ app.use(session({
 }));
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { retry: false, email: '' });
 });
 
 app.post('/sendOTP', async (req, res) => {
@@ -52,9 +52,6 @@ app.post('/verifyOTP', (req, res) => {
     // Retrieve the stored OTP from the session
     const generatedOTP = req.session.generatedOTP;
 
-    // Clear the stored OTP from the session to prevent reuse
-    req.session.generatedOTP = null;
-
     // Compare the entered OTP with the generated OTP
     const isOTPValid = generatedOTP === enteredOTP;
 
@@ -63,8 +60,8 @@ app.post('/verifyOTP', (req, res) => {
         const redirectLink = 'https://www.playbook.com/s/forfree/dMbbWrVpsvdT2qTqFWUE3akh'; // Replace with your desired link
         res.redirect(redirectLink);
     } else {
-        // OTP verification failed, you might want to handle this case
-        res.send('Invalid OTP. Please try again.');
+        // Render the initial form with an indication to retry
+        res.render('index', { retry: true, email });
     }
 });
 
