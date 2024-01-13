@@ -7,46 +7,45 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
-            color: #2d2d2d;
+            background-color: #ffffff; /* Set background color to white */
+            color: #2d2d2d; /* Set text color to dark navy blue */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            flex-direction: column; /* Align items in a column */
             height: 100vh;
-            position: relative;
+            position: relative; /* Make the body relative for positioning the warning message */
         }
 
         h1 {
             text-align: center;
             color: #00bcd4;
-            margin-bottom: 5px;
+            margin-bottom: 5px; /* Add margin for spacing */
         }
 
         h3 {
             text-align: center;
-            color: #001f3f;
-            margin-top: 0;
+            color: #001f3f; /* Dark navy blue color */
+            margin-top: 0; /* Remove default margin for h3 */
         }
 
         .warning-message {
-            display: none; /* Initially hide the warning message */
             position: absolute;
-            top: 10%; /* Adjust the position as needed */
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            background-color: #ffcccb;
+            transform: translate(-50%, -50%);
+            background-color: #ffcccb; /* Light red color for warning */
             padding: 10px;
             border-radius: 4px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1; /* Ensure the warning is above the form */
+            /* Remove "display: none;" to keep the warning message always visible */
         }
 
         form {
             max-width: 400px;
-            margin: 20px auto;
+            margin: 20px auto; /* Add margin for spacing */
             background-color: #363636;
             padding: 20px;
             border-radius: 8px;
@@ -89,11 +88,10 @@
     <h1>USER AUTHORIZATION</h1>
     <h3>Accessing Video Footages</h3>
 
-    <!-- Warning message for incorrect email -->
-    <% if (retry && !isAuthorized) { %>
+    <!-- Warning message for incorrect OTP -->
+    <% if (retry && email) { %>
         <div class="warning-message" id="warningMessage">
-            You are not authorized. Please try again with a valid email.
-            <button onclick="closeWarning()">Close</button>
+            Wrong OTP. Please enter a valid OTP.
         </div>
     <% } %>
 
@@ -122,11 +120,6 @@
         // JavaScript function to show the warning message
         function showWarning() {
             document.getElementById('warningMessage').style.display = 'block';
-        }
-
-        // JavaScript function to close the warning message
-        function closeWarning() {
-            document.getElementById('warningMessage').style.display = 'none';
         }
     </script>
 </body>
