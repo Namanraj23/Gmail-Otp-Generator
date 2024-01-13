@@ -69,6 +69,7 @@
         button:hover {
             background-color: #009688;
         }
+
         .error-message {
             color: #ff0000; /* Red color */
             text-align: center;
@@ -80,15 +81,18 @@
 </head>
 <body>
     <h1>OTP VERIFICATION</h1>
-    <p>An OTP has been sent to your Email !!</p>
-    <form action="/verifyOTP" method="post">
-        <input type="hidden" name="email" value="<%= email %>">
-        <label for="otp">Enter OTP:</label>
-        <input type="text" id="otp" name="otp" required>
-        <!-- <button type="submit">Verify OTP</button> -->
-        <div style="display: flex; justify-content: center;">
-            <button type="submit">Verify OTP</button>
-        </div>
-    </form>
+    <% if (emailExists) { %>
+        <p>An OTP has been sent to your Email !!</p>
+        <form action="/verifyOTP" method="post">
+            <input type="hidden" name="email" value="<%= email %>">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required>
+            <div style="display: flex; justify-content: center;">
+                <button type="submit">Verify OTP</button>
+            </div>
+        </form>
+    <% } else { %>
+        <p class="error-message">Email not found in the database. Please try again with a valid email.</p>
+    <% } %>
 </body>
 </html>
